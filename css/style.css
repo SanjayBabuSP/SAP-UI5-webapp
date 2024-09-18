@@ -10,3 +10,7 @@ html[dir="rtl"] .myAppDemoWalkthrough .myCustomButton.sapMBtn {
     display: inline-block;
     font-weight: bold;
 }
+
+.invoice-table{
+    font-weight: bold;
+}

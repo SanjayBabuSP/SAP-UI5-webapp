@@ -1,11 +1,12 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
     "sap/ui/model/json/JSONModel",
-    "sap/ui/model/resource/ResourceModel"
-], function (UIComponent, JSONModel, ResourceModel) {
+    "sap/ui/model/resource/ResourceModel",
+    "./controller/HelloDialog"
+], function (UIComponent, JSONModel, ResourceModel, HelloDialog) {
     "use strict";
     return UIComponent.extend("sap.ui.demo.walkthrough.Component", {
-        metadata : {
+        metadata: {
             manifest: "json"
         },
         init() {
@@ -14,20 +15,23 @@ sap.ui.define([
             // set data models
             var oData = {
                 recipient: {
-                    name: "Enter your name"
+                    name: "UI5"
                 }
             };
             var oModel = new JSONModel(oData);
             this.setModel(oModel);
 
-            // set i18n model
+           // set dialog
+           this._helloDialog = new HelloDialog(this.getRootControl());
+        },
 
-            // var i18nModel = new ResourceModel({
-            //     bundleName: "sap.ui.demo.walkthrough.i18n.i18n",
-            //     supportedLocales: [""],
-            //     fallbackLocale: ""
-            // });
-            // this.setModel(i18nModel, "i18n")
-        }
+        exit: function () {
+            this._helloDialog.destroy();
+            delete this._helloDialog;
+        },
+
+        openHelloDialog : function () {
+            this._helloDialog.open();
+        }        
     });
 });
